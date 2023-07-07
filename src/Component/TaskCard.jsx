@@ -1,13 +1,15 @@
 import { useDispatch } from "react-redux";
 import { deletetask, edittask } from "../features/Tasks/TaskSlice";
 import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const TaskCard = ({ task }) => {
-  const { id, title, subject, content, deadline } = task;
+  const { id, title, subject, content, SerializedDeadline } = task;
   const [editedtitle, setTitle] = useState(title);
   const [editedsubject, setSubject] = useState(subject);
   const [editedcontent, setContent] = useState(content);
-  const [editeddeadline, setDeadline] = useState(deadline);
+  const [editeddeadline, setDeadline] = useState(SerializedDeadline);
 
   const [edit, setEdit] = useState(false);
 
@@ -30,7 +32,7 @@ const TaskCard = ({ task }) => {
       <h1>{title}</h1>
       <h2>{subject}</h2>
       <p>{content}</p>
-      <p>{deadline}</p>
+      <p>{SerializedDeadline}</p>
       <button onClick={() => setEdit((prevState) => !prevState)}>
         Edit Task
       </button>
@@ -56,10 +58,11 @@ const TaskCard = ({ task }) => {
               onChange={(e) => setContent(e.target.value)}
             />
             <p>Deadline</p>
-            <input
-              type="text"
-              defaultValue={deadline}
-              onChange={(e) => setDeadline(e.target.value)}
+            <DatePicker
+              selected={editeddeadline}
+              onChange={(date) => setDeadline(date)}
+              showTimeSelect
+              dateFormat="Pp"
             />
             <button>Submit</button>
           </form>
