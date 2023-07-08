@@ -1,17 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
-import { cleartask, getTasks } from "../features/Tasks/TaskSlice";
+import { getTasks } from "../features/Tasks/TaskSlice";
 import TaskCard from "./TaskCard";
 
-const TaskWrapper = () => {
+const TaskWrapper = ({ edit, handleEdit }) => {
   const tasks = useSelector(getTasks);
-  const dispatch = useDispatch();
 
   return (
     <>
-      {tasks.map((task) => (
-        <TaskCard task={task} key={task.id} />
-      ))}
-      <button onClick={() => dispatch(cleartask())}>Clear All Tasks</button>
+      <div className="grid gap-y-4 md:grid-cols-2  lg:grid-cols-4 lg:gap-y-4">
+        {tasks.map((task) => (
+          <TaskCard
+            task={task}
+            key={task.id}
+            edit={edit}
+            handleEdit={handleEdit}
+          />
+        ))}
+      </div>
     </>
   );
 };
