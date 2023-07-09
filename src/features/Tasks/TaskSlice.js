@@ -19,6 +19,7 @@ const taskSlice = createSlice({
       selectedtask.subject = action.payload.editedsubject;
       selectedtask.content = action.payload.editedcontent;
       selectedtask.SerializedDeadline = action.payload.SerializedDeadline;
+      selectedtask.priority = action.payload.editedPrio;
     },
     deletetask(state, action) {
       state.task = state.task.filter((task) => task.id !== action.payload);

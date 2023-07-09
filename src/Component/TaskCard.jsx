@@ -16,6 +16,7 @@ const TaskCard = ({ task, edit, handleEdit }) => {
   const [editedsubject, setSubject] = useState(subject);
   const [editedcontent, setContent] = useState(content);
   const [editeddeadline, setDeadline] = useState(SerializedDeadline);
+  const [editedPrio, setPriority] = useState(priority);
 
   const dispatch = useDispatch();
   function handleSubmit(e) {
@@ -28,11 +29,13 @@ const TaskCard = ({ task, edit, handleEdit }) => {
       editedsubject,
       editedcontent,
       SerializedDeadline,
+      editedPrio,
     };
     dispatch(edittask(editedTask));
 
     handleEdit();
   }
+  const InputFieldStyle = `border border-b-1 px-2 py-1 rounded-sm w-full`;
   return (
     <>
       <div
@@ -99,34 +102,50 @@ const TaskCard = ({ task, edit, handleEdit }) => {
         {edit && (
           <>
             <div className="fixed inset-0 flex items-center justify-center z-50 ">
-              <div className="bg-white">
+              <div className="bg-white px-10 py-5 rounded-md shadow-sm w-96">
                 <form onSubmit={handleSubmit}>
                   <p>Title</p>
                   <input
+                    className={InputFieldStyle}
                     type="text"
-                    defaultValue={title}
+                    defaultValue={editedtitle}
                     onChange={(e) => setTitle(e.target.value)}
                   />
                   <p>Subject</p>
                   <input
+                    className={InputFieldStyle}
                     type="text"
-                    defaultValue={subject}
+                    defaultValue={editedsubject}
                     onChange={(e) => setSubject(e.target.value)}
                   />
                   <p>Content</p>
-                  <input
-                    type="text"
-                    defaultValue={content}
+                  <textarea
+                    className={`${InputFieldStyle} max-h-48 min-h-12`}
+                    type="textbox"
+                    defaultValue={editedcontent}
                     onChange={(e) => setContent(e.target.value)}
                   />
                   <p>Deadline</p>
+
                   <DatePicker
+                    className={InputFieldStyle}
                     selected={new Date(Date.parse(editeddeadline))}
                     onChange={(date) => setDeadline(date)}
                     showTimeSelect
                     dateFormat="Pp"
                   />
-                  <button>Submit</button>
+
+                  <div className="flex">
+                    <input
+                      type="checkbox"
+                      defaultValue={priority}
+                      onChange={() => setPriority((prevState) => !prevState)}
+                    />
+                    <p>Priority Task</p>
+                  </div>
+                  <button className="my-2 px-2 py-1 bg-black text-white font-Poppins font-semibold rounded-md">
+                    Edit Task
+                  </button>
                 </form>
               </div>
             </div>
