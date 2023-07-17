@@ -1,5 +1,6 @@
 <h1>TodoApp<h1>
-TodoApp is a simple web application built with ReactJS, Redux Toolkit, React Router DOM, and Tailwind CSS. It provides a user-friendly interface for managing and organizing your daily tasks or to-do items.
+  
+<p>TodoApp is a simple web application built with ReactJS, Redux Toolkit, React Router DOM, and Tailwind CSS. It provides a user-friendly interface for managing and organizing your daily tasks or to-do items.</p>
 
 <h2>Features</h2>
 Add new tasks: Easily add new tasks to your to-do list.
